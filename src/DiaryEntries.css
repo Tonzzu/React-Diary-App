@@ -1,9 +1,12 @@
 .DiaryEntries {
+  /* border: 1px solid red; */
+  margin: 20px auto;
+}
+
+/* .DiaryEntries {
   border: 1px solid #ccc;
   display: flex;
-  /* flex-wrap: wrap; */
   flex-direction: column;
-  /* align-items: flex-start; */
   justify-content: center;
   align-items: center;
   width: 600px;
@@ -25,4 +28,4 @@ ul {
 
 .entry-delete {
   background-color: red;
-}
+} */

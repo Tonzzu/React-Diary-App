@@ -1,6 +1,10 @@
 import React from "react";
 import "./DiaryForm.css";
 import DiaryEntries from "./DiaryEntries";
+import Button from "@material-ui/core/Button";
+import Container from "@material-ui/core/Container";
+import Tooltip from "@material-ui/core/Tooltip";
+import { TextField } from "@material-ui/core";
 
 class DiaryForm extends React.Component {
   constructor(props) {
@@ -39,10 +43,6 @@ class DiaryForm extends React.Component {
 
     diaryEntries.unshift(newEntry);
 
-    // this.setState({
-    //   diaryEntries: [newEntry, ...this.state.diaryEntries]
-    // });
-
     this.setState({
       titleValue: "",
       descriptionValue: "",
@@ -60,36 +60,61 @@ class DiaryForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <Container maxWidth="md" className="DiaryForm">
         <form className="DiaryForm">
-          <label>
-            Title
-            <input
-              type="text"
-              name="titleValue"
-              value={this.state.titleValue}
-              onChange={this.onChangeHandler}
-            />
-          </label>
-          <label>
-            Description
-            <textarea
-              cols="50"
-              rows="15"
-              name="descriptionValue"
-              value={this.state.descriptionValue}
-              onChange={this.onChangeHandler}
-            />
-          </label>
-          <button
-            onClick={this.formSubmitHandler}
-            disabled={
-              !this.state.titleValue.length ||
-              !this.state.descriptionValue.length
-            }
-          >
-            Submit
-          </button>
+          {/* <label> */}
+          {/* Title */}
+          <TextField
+            className="form-title"
+            // required
+            fullWidth
+            margin="dense"
+            label="Title"
+            variant="outlined"
+            // type="text"
+            name="titleValue"
+            value={this.state.titleValue}
+            onChange={this.onChangeHandler}
+          />
+          {/* </label> */}
+          {/* <label> */}
+          {/* Description */}
+          <TextField
+            className="form-description"
+            multiline
+            rows="10"
+            fullWidth
+            margin="dense"
+            // cols="30"
+            label="Description"
+            variant="outlined"
+            // cols="50"
+            // rows="15"
+            name="descriptionValue"
+            value={this.state.descriptionValue}
+            onChange={this.onChangeHandler}
+          />
+          {/* </label> */}
+          <Tooltip title="Add new entry">
+            <Button
+              style={{
+                backgroundColor: "#06c26a",
+                color: '#fff',
+                width: '80px',
+                fontWeight: 'bold'
+              }}
+              className="add-btn"
+              variant="contained"
+              // color=""
+              onClick={this.formSubmitHandler}
+              disabled={
+                !this.state.titleValue.length ||
+                !this.state.descriptionValue.length
+              }
+            >
+              Add
+            </Button>
+          </Tooltip>
         </form>
         <DiaryEntries
           entries={this.state.diaryEntries}
@@ -99,7 +124,7 @@ class DiaryForm extends React.Component {
           id={this.state.diaryEntries.id}
           deleteDiaryEntry={this.deleteDiaryEntry}
         />
-      </div>
+      </Container>
     );
   }
 }

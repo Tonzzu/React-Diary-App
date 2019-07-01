@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
 import DiaryForm from './DiaryForm';
+import Container from '@material-ui/core/Container'
 
 class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>Diary App</h1>
+      <Container className="App">
+        <h1 className="main-header">Diary App</h1>
         <DiaryForm />
-      </div>
+      </Container>
     )
   }
 }

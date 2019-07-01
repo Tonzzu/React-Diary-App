@@ -1,16 +1,40 @@
-.DiaryForm {
+.form-title {
+  margin: 20px 0;
+}
+
+.form-description {
+  margin: 10px auto;
+}
+
+.add-btn {
+  color: #0bd476;
+}
+Button {
+  color: #0bd476;
+
+}
+
+/* .DiaryForm {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+} */
+
+/* .DiaryForm {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
+} */
 
-label {
+
+/* label {
   display: flex;
   flex-direction: column;
-}
+} */
 
-button {
+/* button {
   width: 150px;
   height: 50px;
   border: 3px solid white;
@@ -20,8 +44,4 @@ button {
   font-size: 20px;
   color: white;
   cursor: pointer;
-}
-button:disabled {
-  background-color: rgb(101, 197, 152);
-
-}
+} */
