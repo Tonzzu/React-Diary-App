@@ -1,16 +1,30 @@
 import React from "react";
 import "./DiaryEntries.css";
 
-function DiaryEntries(props) {
-  return (
-    <div>
-      <article className="DiaryEntries">
-        <h2>Title: Hello!</h2>
-        <p>Description: lklklklkkkkkkkkkkk wolololllllllllllloooooooo</p>
-        <p>Date: {new Date().toLocaleDateString()}</p>
-      </article>
-    </div>
-  );
+class DiaryEntries extends React.Component {
+  render() {
+    return (
+      <div>
+        <ul style={{ width: "100%", display: "flex", flexWrap: "wrap" }}>
+          {this.props.entries.map(entry => {
+            return (
+              <li className="DiaryEntries" key={entry.id}>
+                <h2 className="entry-header">{entry.title}</h2>
+                <p className="entry-description">{entry.description}</p>
+                <p className="entry-date">Date: {entry.date}</p>
+                <button
+                  onClick={() => this.props.deleteDiaryEntry(entry.id)}
+                  className="entry-delete btn"
+                >
+                  Delete
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  }
 }
 
-export default DiaryEntries; 
+export default DiaryEntries;

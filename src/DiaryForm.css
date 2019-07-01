@@ -19,4 +19,9 @@ button {
   margin: 10px;
   font-size: 20px;
   color: white;
+  cursor: pointer;
+}
+button:disabled {
+  background-color: rgb(101, 197, 152);
+
 }

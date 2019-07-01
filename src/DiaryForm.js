@@ -12,6 +12,7 @@ class DiaryForm extends React.Component {
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.formSubmitHandler = this.formSubmitHandler.bind(this);
+    this.deleteDiaryEntry = this.deleteDiaryEntry.bind(this);
   }
 
   onChangeHandler(event) {
@@ -20,28 +21,41 @@ class DiaryForm extends React.Component {
     this.setState({
       [name]: event.target.value
     });
-    // console.log(this.state.title);
-    // console.log(this.state.description);
   }
 
   formSubmitHandler(event) {
     event.preventDefault();
+    const diaryEntries = [...this.state.diaryEntries];
+
     const date = new Date().toLocaleDateString();
-    const newEntry = [this.state.titleValue, this.state.descriptionValue, date];
+    const id = 1 + Math.random();
+
+    const newEntry = {
+      title: this.state.titleValue,
+      description: this.state.descriptionValue,
+      date: date,
+      id: id
+    };
+
+    diaryEntries.unshift(newEntry);
+
+    // this.setState({
+    //   diaryEntries: [newEntry, ...this.state.diaryEntries]
+    // });
 
     this.setState({
-      diaryEntries: [...this.state.diaryEntries, newEntry]
+      titleValue: "",
+      descriptionValue: "",
+      diaryEntries
     });
+  }
 
-    // const entries = this.state.diaryEntries;
-    // entries.push([this.state.titleValue, this.state.descriptionValue, date]);
-
-    // console.log("Title: " + this.state.title);
-    // console.log("Description: " + this.state.description);
-
-    // for (let entries in this.state.diaryEntries) {
-    //   console.log(entries)
-    // }
+  deleteDiaryEntry(id) {
+    const diaryEntries = [...this.state.diaryEntries];
+    const updatedDiaryEntries = diaryEntries.filter(entry => entry.id !== id);
+    this.setState({
+      diaryEntries: updatedDiaryEntries
+    });
   }
 
   render() {
@@ -53,7 +67,7 @@ class DiaryForm extends React.Component {
             <input
               type="text"
               name="titleValue"
-              value={this.state.title}
+              value={this.state.titleValue}
               onChange={this.onChangeHandler}
             />
           </label>
@@ -63,16 +77,27 @@ class DiaryForm extends React.Component {
               cols="50"
               rows="15"
               name="descriptionValue"
-              value={this.state.description}
+              value={this.state.descriptionValue}
               onChange={this.onChangeHandler}
             />
           </label>
-          <button onClick={this.formSubmitHandler}>Submit</button>
+          <button
+            onClick={this.formSubmitHandler}
+            disabled={
+              !this.state.titleValue.length ||
+              !this.state.descriptionValue.length
+            }
+          >
+            Submit
+          </button>
         </form>
         <DiaryEntries
-          title={this.state.title}
-          description={this.state.description}
-          date={this.state.date}
+          entries={this.state.diaryEntries}
+          title={this.state.diaryEntries.title}
+          description={this.state.diaryEntries.description}
+          date={this.state.diaryEntries.date}
+          id={this.state.diaryEntries.id}
+          deleteDiaryEntry={this.deleteDiaryEntry}
         />
       </div>
     );
