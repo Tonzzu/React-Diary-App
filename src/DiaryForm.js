@@ -1,5 +1,6 @@
 import React from "react";
 import DiaryEntries from "./DiaryEntries";
+import AppInfoDialog from "./AppInfoDialog";
 import { Container, TextField, Button, Tooltip } from "@material-ui/core";
 
 class DiaryForm extends React.Component {
@@ -13,6 +14,43 @@ class DiaryForm extends React.Component {
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.formSubmitHandler = this.formSubmitHandler.bind(this);
     this.deleteDiaryEntry = this.deleteDiaryEntry.bind(this);
+  }
+
+  componentDidMount() {
+    this.hydrateStateWithLocalStorage();
+
+    window.addEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener(
+      "beforeunload",
+      this.saveStateToLocalStorage.bind(this)
+    );
+    this.saveStateToLocalStorage();
+  }
+
+  saveStateToLocalStorage() {
+    for (let key in this.state) {
+      localStorage.setItem(key, JSON.stringify(this.state[key]));
+    }
+  }
+
+  hydrateStateWithLocalStorage() {
+    for (let key in this.state) {
+      if (localStorage.hasOwnProperty(key)) {
+        let value = localStorage.getItem(key);
+        try {
+          value = JSON.parse(value);
+          this.setState({ [key]: value });
+        } catch (e) {
+          this.setState({ [key]: value });
+        }
+      }
+    }
   }
 
   onChangeHandler(event) {
@@ -57,6 +95,9 @@ class DiaryForm extends React.Component {
   render() {
     return (
       <Container maxWidth="md" className="DiaryForm">
+        <AppInfoDialog
+          style={{ position: "absolute", right: "10px", bottom: "10px" }}
+        />
         <form>
           <TextField
             fullWidth
