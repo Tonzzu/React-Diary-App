@@ -8,7 +8,7 @@ class App extends React.Component {
   render() {
     return (
       <Container className="App">
-        <h1 className="main-header">Diary App</h1>
+        <h1 className="main-header">React Diary App</h1>
         <DiaryForm />
       </Container>
     )

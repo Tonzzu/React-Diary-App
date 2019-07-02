@@ -1,47 +1,40 @@
 import React from "react";
-import "./DiaryEntries.css";
-import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Card from "@material-ui/core/Card";
-import Paper from "@material-ui/core/Paper";
-import Tooltip from "@material-ui/core/Tooltip";
-import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import {
+  ExpansionPanel,
   ExpansionPanelSummary,
-  ExpansionPanelDetails
+  Tooltip,
+  Button
 } from "@material-ui/core";
 
 function DiaryEntries(props) {
   return (
-    <div className="DiaryEntries">
+    <div style={{ margin: "20px 0" }}>
       <ul>
         {props.entries.map(entry => {
           return (
-            <ExpansionPanel key={entry.id}>
+            <ExpansionPanel key={entry.id} style={{margin: '5px 0'}}>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                <h2 className="entry-header">{entry.title}</h2>
+                <h2 style={{ margin: "0 25px" }}>{entry.title}</h2>
               </ExpansionPanelSummary>
-              {/* <ExpansionPanelDetails> */}
-                <p className="entry-description">{entry.description}</p>
-                <p className="entry-date">Date: {entry.date}</p>
-              {/* </ExpansionPanelDetails> */}
+              <p style={{ textAlign: "left", margin: "10px 50px" }}>
+                {entry.description}
+              </p>
+              <p style={{ margin: "10px", fontSize: "14px" }}>{entry.date}</p>
               <Tooltip title="Delete this entry">
                 <Button
-                              style={{
-                backgroundColor: "#f71450",
-                color: '#fff',
-                width: '80px',
-                fontWeight: 'bold'
-
-              }}
+                  style={{
+                    backgroundColor: "#f71450",
+                    color: "#fff",
+                    width: "80px",
+                    fontWeight: "bold",
+                    margin: "20px"
+                  }}
                   variant="contained"
                   // color="secondary"
                   onClick={() => props.deleteDiaryEntry(entry.id)}
-                  className="entry-delete btn"
                 >
                   Delete
-                  {/* <DeleteIcon /> */}
                 </Button>
               </Tooltip>
             </ExpansionPanel>
