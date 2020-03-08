@@ -77,6 +77,7 @@ class DiaryForm extends React.Component {
 
     diaryEntries.unshift(newEntry);
 
+
     this.setState({
       titleValue: "",
       descriptionValue: "",
